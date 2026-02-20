@@ -15,10 +15,15 @@ fc-match Arial
 ```
 
 Fedora:
+```bash
+sudo dnf install curl cabextract xorg-x11-font-utils fontconfig
+sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+fc-match Arial
+```
 
 ## Usage
 
-See `example.tex` and (TODO) template.tex.
+See `example.tex` in the `examples/` directory.
 
 A minimum set of declarations are required for the office-symbol, subject,
 signature block, etc. After these options, within `\begin{document}` ...
@@ -81,13 +86,12 @@ Copyright (c) 2011 George Allen, All rights reserved.
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
-Foundation; either version 2 of the License, or (at your option) any later
+Foundation; either version 3 of the License, or (at your option) any later
 version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
-this program; if not, write to the Free Software Foundation, Inc., 59 Temple
-Place, Suite 330, Boston, MA  02111-1307  USA
+this program; if not, see <https://www.gnu.org/licenses/>.
