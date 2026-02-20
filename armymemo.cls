@@ -12,8 +12,10 @@
   DIV=15
 ]{scrartcl}
 
-% ensure no extra space after periods, AR 25-50, 1-39.a
-\frenchspacing
+% AR 25-50 (4 OCT 2024) 1-39 requires two spaces after ending punctuation.
+% LaTeX's default \nonfrenchspacing adds extra space after sentence-ending
+% punctuation, satisfying this requirement.
+\nonfrenchspacing
 
 \AtBeginDocument{%
   \ifstrempty{\am@documentmark}{}{%
