@@ -79,7 +79,6 @@
 % required for conditionals (already implied)
 \RequirePackage{etoolbox}
 % Setup fonts:
-\RequirePackage[utf8]{inputenc}
 % allow automatic quote expansion
 \RequirePackage{csquotes}
 \MakeOuterQuote{"}
@@ -166,8 +165,7 @@
 % reduce hyphens with a combination of \hypenpenalty and microtype
 \RequirePackage{microtype}
 
-% do I need this later? https://tex.stackexchange.com/a/64615
-\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue,breaklinks=true]{hyperref}
+\RequirePackage[colorlinks=true,urlcolor=blue,citecolor=blue,breaklinks=true]{hyperref}
 \urlstyle{same}
 
 \RequirePackage{ragged2e}
