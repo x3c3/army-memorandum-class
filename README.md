@@ -1,11 +1,22 @@
 # Army Memorandum LaTeX Class
 
-Provides a basic AR 25-50 memo in latex.
+Provides a basic AR 25-50 memo in LaTeX.
+
+## Changes in 0.3.0
+
+- Updated for AR 25-50 administrative revision (4 OCT 2024): two spaces after
+  ending punctuation restored per para 1-39.
+- Font choice is now deferred to senior leaders per the 2024 revision. The
+  default is still Arial, but you can override with `\setmainfont{Times New Roman}`.
+- Fixed signature block positioning bug (TikZ anchor/offset workaround removed).
+- Removed redundant `inputenc` package (unnecessary with LuaLaTeX/XeLaTeX).
+- Consistent use of `\RequirePackage` throughout the class file.
+- Cleaned up dead code and duplicate list configuration.
 
 ## Setup
 
 * Requires LuaLaTeX or XeLaTeX for font handling.
-* Install Arial font ("preferred" by AR 25-50 1-17)
+* Install Arial font (default; font choice deferred to senior leaders as of AR 25-50, 4 OCT 2024)
 
 Debian:
 ```bash
@@ -52,8 +63,8 @@ The basic structure looks like:
 \subject[(U) ]{The creation of memos using \LaTeX}
 \authority{BY ORDER OF THE COMMANDER}                             % optional
 
-% AR 25-50 mandated Arial from 2013-2020.
-% The default is still Arial, but you can restore Times using:
+% AR 25-50 (4 OCT 2024) defers font choice to senior leaders.
+% The default is Arial, but you can switch to Times using:
 \setmainfont{Times New Roman}
 
 \begin{document}

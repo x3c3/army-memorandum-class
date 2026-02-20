@@ -2,7 +2,7 @@
 
 % https://github.com/glallen01/army-memorandum-class
 
-\ProvidesClass{armymemo}[2023/10/16 0.2.2 Army Memorandum Class]
+\ProvidesClass{armymemo}[2025/02/20 0.3.0 Army Memorandum Class]
 \NeedsTeXFormat{LaTeX2e}
 
 \LoadClass[
@@ -26,9 +26,7 @@
   \vspace*{1\baselineskip}
 }
 
-% \typeout{===========>}\show\@enddocumenthook
 % https://tex.stackexchange.com/a/212214
-% BUG: something is messing with this, so for now moving it to the top
 \AtEndDocument{%
   \setlength{\parskip}{0pt}
   \vspace*{\baselineskip}
