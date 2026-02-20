@@ -44,26 +44,6 @@
   \am@encls%
   \am@distro%
   \am@cf%
-%
-%   % since minipages can't break, and this may happen near the bottom of a page,
-%   % only encls and signature block go in the first mini-page
-%   \begin{minipage}[t]{0.49\textwidth}
-%     \am@encls
-%   \end{minipage}
-%   % signatureblock
-% %  % \begin{minipage}[t]{0.49\textwidth}
-%   %   % consider changing this to an \addtosig{}
-%   %   % \am@author\\ 
-%   %   % \am@rank, \am@branch\\
-%   %   % \am@title
-% %  % \end{minipage}
-%   % \filbreak % if a break must happen, do it here, rather than orphaning the signature
-%   % spacing issues w/ minipage: https://tex.stackexchange.com/q/349178/6648
-%   % TODO: figure out continuations of Distro and CF across pagebreaks
-%   \begin{minipage}[t]{0.49\textwidth}\am@distro\end{minipage}%
-%   \begin{minipage}[t]{0.49\textwidth}\ \end{minipage}
-%   \begin{minipage}[t]{0.49\textwidth}\am@cf\end{minipage}%
-%   \begin{minipage}[t]{0.49\textwidth}\ \end{minipage}
 }
 
 
@@ -104,7 +84,6 @@
 \RequirePackage[pages=all,color=black]{background}
 % required to enable high-depth nested lists, and custom numbering
 \RequirePackage{enumitem}
-\setlist{topsep=0pt,itemsep=0pt,parsep=0pt}
 \renewlist{enumerate}{enumerate}{9}
 \setlistdepth{9}
 % required for \setstretch used in header
