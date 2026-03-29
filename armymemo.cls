@@ -31,15 +31,20 @@
   \setlength{\parskip}{0pt}
   \vspace*{\baselineskip}
   \noindent\am@authorityline\\
-  \vspace*{4\baselineskip}
+  \vspace*{4\baselineskip}%
   \begin{tikzpicture}[overlay]
     %% to draw a grid for debugging
     % \draw[style=help lines] (0,0) grid (15,5);
     \node [align=left, anchor=west, inner sep=0, outer sep=0] at (0.5\textwidth,-10pt){% TODO BUG - why a 10pt offset? I don't know.
-      {\MakeUppercase \am@author}\\ 
+      {\MakeUppercase \am@author}\\
       \am@rank, \am@branch\\
       \am@title
     };
+    \ifbool{am@digsig}{%
+      \node [align=left, anchor=south west, inner sep=0, outer sep=0] at (0.5\textwidth,\baselineskip){%
+        \begin{Form}\digsigfield{3in}{3\baselineskip}{signature}\end{Form}%
+      };
+    }{}
   \end{tikzpicture}%
   \am@encls%
   \am@distro%
@@ -146,6 +151,8 @@
 
 
 % process class options
+\newbool{am@digsig}
+\DeclareOption{digsig}{\booltrue{am@digsig}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
 \ProcessOptions\relax
 
@@ -169,6 +176,7 @@
 
 % do I need this later? https://tex.stackexchange.com/a/64615
 \usepackage[colorlinks=true,urlcolor=blue,citecolor=blue,breaklinks=true]{hyperref}
+\ifbool{am@digsig}{\RequirePackage{digsig}}{}
 \urlstyle{same}
 
 \RequirePackage{ragged2e}
