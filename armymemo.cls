@@ -2,7 +2,7 @@
 
 % https://github.com/glallen01/army-memorandum-class
 
-\ProvidesClass{armymemo}[2023/10/16 0.2.2 Army Memorandum Class]
+\ProvidesClass{armymemo}[2026/03/29 0.3.0 Army Memorandum Class]
 \NeedsTeXFormat{LaTeX2e}
 
 \LoadClass[
@@ -11,9 +11,6 @@
   headings=small,
   DIV=15
 ]{scrartcl}
-
-% ensure no extra space after periods, AR 25-50, 1-39.a
-\frenchspacing
 
 \AtBeginDocument{%
   \ifstrempty{\am@documentmark}{}{%
@@ -91,8 +88,8 @@
 % for font selection
 \RequirePackage{fontspec}
 \RequirePackage[english]{babel}
-% AR 25-50 recommends Arial as of 17 May 2013.  1-17b
-\setmainfont{Arial}
+% AR 25-50 allows command direction of font selection, defaulting to Times New Roman
+\setmainfont{Times New Roman}
 \setsansfont{Arial}
 \defaultfontfeatures{Mapping=tex-text} % To support LaTeX ``" quotes.
 
