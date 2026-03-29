@@ -4,21 +4,39 @@
 
 ## [Unreleased]
 
+---
+
+## [0.3.0] - 2026-03-29
+
 ### Added
 - `[digsig]` class option: enables an interactive PDF digital signature field in the signature block, positioned above the signer name line and aligned to the signature block indent
-- Bundled `digsig.sty` v2.3 (2022-03-31, MIT, Martin Lottermoser) — provides `\digsigfield` macro via hyperref extension
+- Bundled `digsig.sty` v2.3 (2022-03-31, MIT, Martin Lottermoser) -- provides `\digsigfield` macro via hyperref extension
 - `examples/digsig.sty` symlink so examples compile without TEXINPUTS changes
-- `examples/example-sig.tex` — new example demonstrating the `[digsig]` option with a custom logo
+- `examples/example-sig.tex` -- new example demonstrating the `[digsig]` option with a custom logo
 - `\enclsnocount`: new command for unnumbered enclosure list (AR 25-50 Figure 4-4)
 
 ### Fixed
-- `\enclsnocount` command — suppresses enclosure count per AR 25-50 Figure 4-4
+- `\enclsnocount` command -- suppresses enclosure count per AR 25-50 Figure 4-4
 - `SUBJECT:` line now uses double-space per AR 25-50 1-17
 - Added `\brokenpenalty=10000` to prevent hyphenation across page breaks
 
 ### Changed
-- Refactored `\am@encls` to proper if/else chain
 
+- Removed `\frenchspacing` -- 4 OCT 24 update: 1-39.b.(9) two spaces after
+  sentences. *The space between sentences in LaTeX is stretchy anyway, and
+  there's hardly any visible difference between the two. This restores the
+  default behavior.* See discussion: https://tex.stackexchange.com/q/4705
+- 4 OCT 24 update: 1-19. Leaders can direct fonts and formatting. -- Font
+  default changed from Arial to Times New Roman Following IG guidance for Army
+  Senior leaders (below). Can be overridden by placing `\setmainfont{Arial}` in
+  the preamble.  As cited at  https://ig.army.mil/Portals/101/Documents/IG%20Training%20Documents/DAIG_2025%20Correspondence%20and%20Reports%20Guide_web.pdf?ver=tD5_JdJC9pYy11ki077Fow%3D%3D
+
+    > As of May 2024, all correspondence addressed to the Top 4 Army Senior leaders (Secretary,
+    > Under Secretary, Chief of Staff, and Vice Chief of Staff) will adhere to the standards issued by
+    > Executive Communications and Control (ECC). In particular, this includes the use of Times New
+    > Roman in all communications (except the letterhead itself, which remains in Arial).
+
+- Refactored `\am@encls` to proper if/else chain
 
 ---
 
