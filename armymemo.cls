@@ -31,15 +31,20 @@
   \setlength{\parskip}{0pt}
   \vspace*{\baselineskip}
   \noindent\am@authorityline\\
-  \vspace*{4\baselineskip}
+  \vspace*{4\baselineskip}%
   \begin{tikzpicture}[overlay]
     %% to draw a grid for debugging
     % \draw[style=help lines] (0,0) grid (15,5);
     \node [align=left, anchor=west, inner sep=0, outer sep=0] at (0.5\textwidth,-10pt){% TODO BUG - why a 10pt offset? I don't know.
-      {\MakeUppercase \am@author}\\ 
+      {\MakeUppercase \am@author}\\
       \am@rank, \am@branch\\
       \am@title
     };
+    \ifbool{am@digsig}{%
+      \node [align=left, anchor=south west, inner sep=0, outer sep=0] at (0.5\textwidth,\baselineskip){%
+        \begin{Form}\digsigfield{3in}{3\baselineskip}{signature}\end{Form}%
+      };
+    }{}
   \end{tikzpicture}%
   \am@encls%
   \am@distro%
@@ -146,6 +151,8 @@
 
 
 % process class options
+\newbool{am@digsig}
+\DeclareOption{digsig}{\booltrue{am@digsig}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{scrartcl}}
 \ProcessOptions\relax
 
@@ -165,17 +172,20 @@
 % \RaggedRight is a bit more compact, but allows lots of hyphens
 % reduce hyphens with a combination of \hypenpenalty and microtype
 \RequirePackage{microtype}
+% TODO: disable if using xelatex
 
 % do I need this later? https://tex.stackexchange.com/a/64615
 \usepackage[colorlinks=true,urlcolor=blue,citecolor=blue,breaklinks=true]{hyperref}
+\ifbool{am@digsig}{\RequirePackage{digsig}}{}
 \urlstyle{same}
 
 \RequirePackage{ragged2e}
 \RaggedRight
 
-% AR 25-50 allows for hyphenation (just not across pages, which LaTeX won't do
-% anyway) we just want less hyphenation than more
+% AR 25-50 allows for hyphenation (just not across pages per AR 25-50 2-5-c-3)
+% and we want less hyphenation than more
 \hyphenpenalty=5000
+\brokenpenalty=10000
 % \RequirePackage[none]{hyphenat}
 % https://tex.stackexchange.com/a/134318
 % https://tex.stackexchange.com/a/249335
@@ -312,7 +322,7 @@
 
 %%%%% ----------------------------------------------------------------
 
-\renewcommand{\subject}[1]{\def\am@subject{SUBJECT: #1}}
+\renewcommand{\subject}[1]{\def\am@subject{SUBJECT:~~#1}}
 \subject{\am@MissingRequiredArgWarning{subject}{DRAFT}}
 
 % top and bottom of page classification markings
@@ -331,24 +341,33 @@
 
 
 % add enclosures along with a total count
+% use \enclsnocount to print "Encls" without a numeric count (AR 25-50 Figure 4-4)
 \newcommand{\am@do@encl}[1]{\item #1 }
 \newcounter{am@encl@count}
+\newbool{am@encls@nocount}
+\newcommand{\enclsnocount}{\booltrue{am@encls@nocount}}
 \newcommand{\addencl}[1]{\stepcounter{am@encl@count}\listadd{\am@list@encls}{#1}}
 \newcommand{\am@encls}{%
   \ifnumcomp{\value{am@encl@count}}{=}{0}{%
   }{%
-    \ifnumcomp{\value{am@encl@count}}{=}{1}{%
-      \noindent{}Encl%
-      \begin{enumerate}[topsep=0pt,itemsep=0pt,parsep=0pt,itemindent=0pt,align=left,label={}]
-        \forlistloop{\am@do@encl}{\am@list@encls}
-      \end{enumerate}
-      \vspace{\baselineskip}
-    }{}%
-    \ifnumcomp{\value{am@encl@count}}{>}{1}{%
-      \noindent\theam@encl@count{} Encls%
+    \ifbool{am@encls@nocount}{%
+      \noindent{}Encls%
       \begin{enumerate}[topsep=0pt,itemsep=0pt,parsep=0pt,leftmargin=16pt,itemindent=0pt,align=left,label={\arabic*.}]
         \forlistloop{\am@do@encl}{\am@list@encls}
-      \end{enumerate}}{}
+      \end{enumerate}
+    }{%
+      \ifnumcomp{\value{am@encl@count}}{=}{1}{%
+        \noindent{}Encl%
+        \begin{enumerate}[topsep=0pt,itemsep=0pt,parsep=0pt,itemindent=0pt,align=left,label={}]
+          \forlistloop{\am@do@encl}{\am@list@encls}
+        \end{enumerate}
+      }{%
+        \noindent\theam@encl@count{} Encls%
+        \begin{enumerate}[topsep=0pt,itemsep=0pt,parsep=0pt,leftmargin=16pt,itemindent=0pt,align=left,label={\arabic*.}]
+          \forlistloop{\am@do@encl}{\am@list@encls}
+        \end{enumerate}%
+      }%
+    }%
   }
 }
 
